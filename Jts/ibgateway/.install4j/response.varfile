@@ -1,0 +1,9 @@
+# install4j response file for IB Gateway 10.19 (.1j) 20230111 18:06:40
+cmdLineArgs$StringArray="/root/Jts","ndc1.ibllc.com\:4000"
+exeName=ibgateway
+executeLauncherAction$Boolean=false
+installerType=standalone
+jtsConfigDir=/root/Jts
+sys.adminRights$Boolean=true
+sys.installationDir=/root/Jts/ibgateway/10.19.1j
+sys.languageId=en
