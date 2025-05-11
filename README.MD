@@ -87,6 +87,4 @@ Simulate placing a simple order.
 - Headless IB Gateway containerized
 - Automated login via IBC and FastAPI
 - Easily testable with curl/Postman
-- No AI-generated traces included
-
 ---
