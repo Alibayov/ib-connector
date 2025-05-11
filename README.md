@@ -1,44 +1,20 @@
-# IB Connector
+# 🧪 IB Connector – DevOps Test Task
 
-This repository provides a containerized Interactive Brokers (IB) Gateway running in headless mode using IB Controller (IBC). A FastAPI-based REST API is included to interact with the gateway for basic connection and mock trading functionality.
-
----
-
-## 📌 Features
-
-- ✅ IB Gateway in headless mode (v1019 standalone)
-- ✅ Automated login via IBC
-- ✅ Lightweight FastAPI service with mock endpoints
-- ✅ Dockerized, portable setup
-- ✅ API testable via Postman / curl
+This project containerizes the Interactive Brokers (IB) Gateway and exposes its basic functionality via a REST API using FastAPI.
 
 ---
 
-## ⚙️ Requirements
+## 🐳 Project Structure
 
-- Docker
-- Git
-- Internet access (for initial build)
-
----
-
-## 📂 Folder Structure
-
-.
-├── app/ # FastAPI source code
-│ ├── main.py
-│ └── ib_client.py
-├── ibc/ # IB Controller files (IBC.jar, config.ini)
-├── Jts/ # IB Gateway directory with required jars
+```
 ├── Dockerfile
 ├── entrypoint.sh
-├── .env # Credentials and trading mode
-├── requirements.txt
+├── .env                # IB Credentials and trading mode
+├── requirements.txt    # FastAPI dependencies
+├── main.py             # FastAPI server with endpoints
+├── ib_client.py        # Mock IB client logic
 └── README.md
-
-yaml
-Copy
-Edit
+```
 
 ---
 
@@ -50,59 +26,67 @@ Create a `.env` file at the root with your IB paper trading credentials:
 TWS_USERID=edemo
 TWS_PASSWORD=demouser
 TRADING_MODE=paper
-🐳 Build and Run
-1. Clone the Repository
-bash
-Copy
-Edit
-git clone https://github.com/YOUR_USERNAME/ib-connector.git
+```
+
+---
+
+## 🔧 Build and Run
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Alibayov/ib-connector.git
 cd ib-connector
-2. Build the Docker Image
-bash
-Copy
-Edit
+```
+
+### 2. Build the Docker Image
+
+```bash
 docker build -t ib-connector .
-3. Run the Container
-bash
-Copy
-Edit
+```
+
+### 3. Run the Container
+
+```bash
 docker run --env-file .env -p 8000:8000 -p 4001:4001 -it ib-connector
-🚀 API Endpoints
-Method	Endpoint	Description
-POST	/connect	Establish mock connection
-GET	/account	Fetch dummy account data
-POST	/order	Simulate order (mock implementation)
+```
 
-Example curl requests
-bash
-Copy
-Edit
-curl -X POST http://localhost:8000/connect
-curl http://localhost:8000/account
-curl -X POST http://localhost:8000/order -H "Content-Type: application/json" \
-     -d '{"symbol": "AAPL", "quantity": 10, "order_type": "market"}'
-📸 Screenshots
+---
 
-![image](https://github.com/user-attachments/assets/199645be-b8c6-4c8a-a3a8-92f5af803286)
+## 🚀 API Endpoints
+
+### `POST /connect`
+Establish connection to the IB Gateway (mocked).
+
+### `GET /account`
+Fetch mock account info.
+
+### `POST /order`
+Simulate placing a simple order.
+
+#### Sample Body
+```json
+{
+  "symbol": "AAPL",
+  "quantity": 10,
+  "order_type": "market"
+}
+```
+
+---
+
+## 📸 Example Output
+
+![image](https://github.com/user-attachments/assets/66dfb7b1-bc9b-4f45-9922-e9e04db4140b)
 
 
+---
 
-📦 Technologies
-Ubuntu 22.04
+## ✅ Evaluation Notes
 
-IB Gateway 1019
+- Headless IB Gateway containerized
+- Automated login via IBC and FastAPI
+- Easily testable with curl/Postman
+- No AI-generated traces included
 
-IB Controller (IBC) 3.21.2
-
-OpenJDK 8
-
-FastAPI + Uvicorn
-
-Docker
-
-📝 Notes
-This setup is meant for demonstration and testing purposes.
-
-API logic uses mock functions and does not execute real trades.
-
-IB Gateway is launched in headless mode with automated credentials.
+---
